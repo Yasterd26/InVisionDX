@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical AI - Login</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #FF6F61;
+            --primary-hover: #E05A4D;
+            --secondary-color: #4A90E2;
+            --text-color: #333333;
+            --light-gray: #F4F4F4;
+            --error-color: #FF3B30;
+            --success-color: #34C759;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: url("/static/6130237.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            color: var(--dark-gray);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #vanta-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .logo-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin-top: -120px;
+        }
+
+        .logo-container img {
+            max-width: 400px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        .auth-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            margin-left: 269px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            width: 100%;
+            max-width: 550px;
+            position: relative;
+        }
+
+        .login-header {
+            background: rgba(164, 20, 6, 0.763);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .login-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .login-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 111, 97, 0.1);
+        }
+
+        .form-group .input-icon {
+            position: absolute;
+            right: 15px;
+            top: 38px;
+            color: #999;
+        }
+
+        .form-group input:focus + .input-icon {
+            color: var(--primary-color);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-hover);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background:  rgba(164, 20, 6, 0.643);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 111, 97, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .login-btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #666;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #e1e1e1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .social-btn i {
+            font-size: 1.2rem;
+        }
+
+        .google-btn {
+            color: #DB4437;
+        }
+
+        .facebook-btn {
+            color: #4267B2;
+        }
+
+        .twitter-btn {
+            color: #1DA1F2;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .register-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: var(--primary-hover);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                border-radius: 15px;
+            }
+
+            .login-header {
+                padding: 30px 15px;
+            }
+
+            .login-form {
+                padding: 20px;
+            }
+
+            .social-buttons {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="vanta-canvas"></div>
+    <div class="auth-container">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your Medical AI Dashboard</p>
+            </div>
+            <form class="login-form" action="/login" method="POST">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    <i class="fas fa-envelope input-icon"></i>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    <i class="fas fa-lock input-icon"></i>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        Remember me
+                    </label>
+                    <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-btn">Sign In</button>
+                <div class="social-login">
+                    <p>Or continue with</p>
+                    <div class="social-buttons">
+                        <div class="social-btn google-btn">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="social-btn facebook-btn">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="social-btn twitter-btn">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="register-link">
+                    Don't have an account? <a href="/register">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="logo-container">
+        <img src="/static/logo.png" alt="Medical AI Logo">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('.login-form');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+
+            // Email validation
+            emailInput.addEventListener('input', function() {
+                const email = this.value;
+                if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                    emailError.textContent = 'Please enter a valid email address';
+                    emailError.style.display = 'block';
+                } else {
+                    emailError.style.display = 'none';
+                }
+            });
+
+            // Password validation
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                if (password.length < 6) {
+                    passwordError.textContent = 'Password must be at least 6 characters long';
+                    passwordError.style.display = 'block';
+                } else {
+                    passwordError.style.display = 'none';
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic validation
+                if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                    emailError.textContent = 'Please enter a valid email address';
+                    emailError.style.display = 'block';
+                    return;
+                }
+
+                if (passwordInput.value.length < 6) {
+                    passwordError.textContent = 'Password must be at least 6 characters long';
+                    passwordError.style.display = 'block';
+                    return;
+                }
+
+                // If validation passes, submit the form
+                this.submit();
+            });
+
+            // Social login buttons
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const platform = this.querySelector('i').classList[1].split('-')[2];
+                    console.log(`Login with ${platform}`);
+                    // Add your social login logic here
+                });
+            });
+        });
+
+        // Initialize Vanta.js
+        VANTA.BIRDS({
+            el: "#vanta-canvas",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            backgroundColor: 0xe16464,
+            color1: 0xf01d1d,
+            color2: 0xd26f6f,
+            birdSize: 0.80,
+            separation: 45.00,
+            alignment: 100.00,
+            cohesion: 1.00,
+            backgroundAlpha: 0.29
+        });
+    </script>
+</body>
+</html> 

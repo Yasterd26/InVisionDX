@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Success - InVisionDX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --baby-flamingo: #F8C2D0;
+            --dark-gray: #333333;
+            --light-gray: #F4F4F4;
+            --accent-color: #FF6F61;
+            --accent-hover: #E05A4D;
+            --accent-light: #FFE0DD;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --gradient-start: #FF6F61;
+            --gradient-end: #FF9671;
+        }
+
+        body {
+            min-height: 100vh;
+            background: url("/static/6130237.jpg") no-repeat center center fixed;
+            background-size: cover;
+            color: var(--dark-gray);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #vanta-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(199, 24, 9, 0.572);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .success-container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .success-header {
+            text-align: center;
+            margin-bottom: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .success-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        .success-header p {
+            font-size: 1.1em;
+            color: var(--dark-gray);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: var(--box-shadow);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+
+        .stat-card .label {
+            color: var(--dark-gray);
+            font-size: 1.1em;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .chart-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background: rgba(199, 24, 9, 0.572);
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 20px;
+            }
+
+            .nav .nav-links {
+                gap: 15px;
+            }
+
+            .success-container {
+                margin-top: 80px;
+                padding: 15px;
+            }
+
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="vanta-canvas"></div>
+    <nav class="nav">
+        <a href="/" class="logo">InVisionDX</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/profile">Profile</a>
+            <a href="/project_success">Project Success</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="success-container">
+        <div class="success-header">
+            <h1>Project Success Metrics</h1>
+            <p>Comprehensive analysis of our medical imaging prediction system</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Predictions</h3>
+                <div class="number">{{ total_predictions }}</div>
+                <div class="label">Across all models</div>
+            </div>
+            <div class="stat-card">
+                <h3>COVID-19 Predictions</h3>
+                <div class="number">{{ covid_predictions }}</div>
+                <div class="label">Success rate: {{ covid_success_rate }}%</div>
+            </div>
+            <div class="stat-card">
+                <h3>Pneumonia Predictions</h3>
+                <div class="number">{{ pneumonia_predictions }}</div>
+                <div class="label">Success rate: {{ pneumonia_success_rate }}%</div>
+            </div>
+            <div class="stat-card">
+                <h3>TB Predictions</h3>
+                <div class="number">{{ tb_predictions }}</div>
+                <div class="label">Success rate: {{ tb_success_rate }}%</div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>Predictions by Model</h3>
+                <div class="chart-container">
+                    <canvas id="predictionsChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Success Rates</h3>
+                <div class="chart-container">
+                    <canvas id="successRatesChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 InVisionDX. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize Vanta.js
+        VANTA.BIRDS({
+            el: "#vanta-canvas",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            backgroundColor: 0xe16464,
+            color1: 0xf01d1d,
+            color2: 0xd26f6f,
+            birdSize: 0.80,
+            separation: 45.00,
+            alignment: 100.00,
+            cohesion: 1.00,
+            backgroundAlpha: 0.29
+        });
+
+        // Predictions by Model Chart
+        const predictionsCtx = document.getElementById('predictionsChart').getContext('2d');
+        new Chart(predictionsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['COVID-19', 'Pneumonia', 'TB'],
+                datasets: [{
+                    label: 'Number of Predictions',
+                    data: [{{ covid_predictions }}, {{ pneumonia_predictions }}, {{ tb_predictions }}],
+                    backgroundColor: [
+                        'rgba(255, 111, 97, 0.5)',
+                        'rgba(255, 111, 97, 0.5)',
+                        'rgba(255, 111, 97, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 111, 97, 1)',
+                        'rgba(255, 111, 97, 1)',
+                        'rgba(255, 111, 97, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            color: '#333'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            color: '#333'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#333'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Success Rates Chart
+        const successRatesCtx = document.getElementById('successRatesChart').getContext('2d');
+        new Chart(successRatesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['COVID-19', 'Pneumonia', 'TB'],
+                datasets: [{
+                    label: 'Success Rate (%)',
+                    data: [{{ covid_success_rate }}, {{ pneumonia_success_rate }}, {{ tb_success_rate }}],
+                    backgroundColor: [
+                        'rgba(255, 111, 97, 0.5)',
+                        'rgba(255, 111, 97, 0.5)',
+                        'rgba(255, 111, 97, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 111, 97, 1)',
+                        'rgba(255, 111, 97, 1)',
+                        'rgba(255, 111, 97, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            color: '#333'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            color: '#333'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#333'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
