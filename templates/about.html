@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add this in the <head> section -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - InVisionDX</title>
+    
+    <style> 
+
+    /* Add these styles */
+        #scroll-top-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #d32f2f;
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            width: 50px;
+            height: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        #scroll-top-btn:hover {
+            background-color: #b71c1c;
+            transform: translateY(-5px);
+        }
+
+            /* Add these styles */
+        .testimonial-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-container {
+            display: none;
+        }
+
+        .testimonial-container.active {
+            display: block;
+            animation: fadeEffect 1s;
+        }
+
+        @keyframes fadeEffect {
+            from {opacity: 0.4;}
+            to {opacity: 1;}
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .prev-btn, .next-btn {
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            color: #d32f2f;
+            font-weight: bold;
+            transition: 0.3s ease;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin: 0 20px;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: #d32f2f;
+        }
+            /* Add these styles */
+            .circular-progress {
+                width: 120px;
+                height: 120px;
+                margin-bottom: 20px;
+            }
+
+            .progress-bg {
+                fill: none;
+                stroke: #f0f0f0;
+                stroke-width: 8;
+            }
+
+            .progress-bar {
+                fill: none;
+                stroke: #d32f2f;
+                stroke-width: 8;
+                stroke-linecap: round;
+                transform: rotate(-90deg);
+                transform-origin: 50% 50%;
+                stroke-dasharray: 251.2;
+                stroke-dashoffset: 251.2;
+            }
+
+            .stat-content {
+                text-align: center;
+            }
+
+        /* Add this to your CSS */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 100px 0;
+        }
+
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 10px;
+        }
+        /* Base styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Update your body styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
+        }
+
+        /* Add these styles for the navigation */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #d32f2f;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #d32f2f;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #d32f2f;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: #d32f2f;
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 30px;
+        }
+
+        .nav-cta:hover {
+            background: #b71c1c;
+            transform: scale(1.05);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                height: 92vh;
+                top: 8vh;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-links li {
+                opacity: 0;
+                margin: 20px 0;
+            }
+            
+            .burger {
+                display: block;
+            }
+            
+            .nav-active {
+                transform: translateX(0%);
+            }
+        }
+                
+        /* Header styling */
+        /* Replace your current page-header background */
+        .page-header {
+            background: linear-gradient(-45deg, #ffebee, #ffcdd2, #ef9a9a, #e57373);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+            padding: 80px 0 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-15px) translateX(15px); }
+            50% { transform: translateY(0) translateX(30px); }
+            75% { transform: translateY(15px) translateX(15px); }
+        }
+        
+        /* Section styling */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: #d32f2f;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: #ffcdd2;
+            margin-top: 10px;
+        }
+        
+        /* Problem section */
+        .problem-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .problem-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 30px;
+        }
+        
+        .problem-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .stat-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 50px;
+        }
+        
+        .stat-box {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin: 15px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #d32f2f;
+            margin-bottom: 10px;
+        }
+        
+        /* Patient perspective */
+        .testimonial-container {
+            position: relative;
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .testimonial-quote:before {
+            content: '❝';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: #ffcdd2;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        
+        /* Technology section */
+        /* Replace your tech-card styles */
+        .tech-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .tech-card-header {
+            background: #d32f2f;
+            color: white;
+            padding: 15px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card-header::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .tech-card:hover .tech-card-header::before {
+            left: 100%;
+        }
+        
+        /* Outcomes section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #ffcdd2;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            animation: fadeIn 1s linear forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #d32f2f;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -12px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* CTA section */
+        .cta-section {
+            background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-btn {
+            background: white;
+            color: #d32f2f;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+                
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 1s;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 1s;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 1s;
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Add this right after <body> -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">InVisionDX</div>
+                <ul class="nav-links">
+                    <li><a href="#challenge">The Challenge</a></li>
+                    <li><a href="#patients">Patient Perspective</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#impact">Impact</a></li>
+                    <li><a href="#" class="nav-cta">Request Demo</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </nav>
+    <!-- Header Section -->
+    <!-- Example usage - replace a section like this -->
+    <section class="parallax-section" id="impact" style="background-image: url('/api/placeholder/1200/600');">
+        <div class="container">
+            <div class="overlay">
+                <div class="section-title">
+                    <h2>Revolutionizing Healthcare</h2>
+                </div>
+                
+                <!-- Rest of your content -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- The Challenge Section -->
+    <section class="section" id="challenge">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Challenge</h2>
+            </div>
+            
+            <div class="problem-container">
+                <div class="problem-text slide-in-left">
+                    <h3>Traditional Diagnostic Limitations</h3>
+                    <p>Medical professionals face significant challenges in diagnostic processes:</p>
+                    <ul>
+                        <li>Manual interpretation of medical images is time-consuming and prone to human error</li>
+                        <li>Paper-based records cause delays in accessing patient histories</li>
+                        <li>Limited accessibility to specialist expertise, especially in remote areas</li>
+                        <li>Inconsistent diagnostic standards across different healthcare facilities</li>
+                        <li>Overwhelmed healthcare systems leading to diagnostic backlogs</li>
+                    </ul>
+                </div>
+                <div class="problem-image slide-in-right">
+                    <img src="/api/placeholder/400/300" alt="Doctor examining scans" />
+                </div>
+            </div>
+            
+            <!-- Replace your stat-container with this -->
+                <div class="stat-container">
+                    <div class="stat-box">
+                        <svg class="circular-progress" viewBox="0 0 100 100">
+                            <circle class="progress-bg" cx="50" cy="50" r="40"></circle>
+                            <circle class="progress-bar" cx="50" cy="50" r="40" data-value="40"></circle>
+                        </svg>
+                        <div class="stat-content">
+                            <div class="stat-number" id="stat1">40%</div>
+                            <p>Of diagnostic errors result from misinterpretation of medical imaging</p>
+                        </div>
+                    </div>
+                    <!-- Repeat for other stats -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Patient Perspective Section -->
+    <section class="section" id="patients" style="background-color: #f5f5f5;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Patient Perspective</h2>
+            </div>
+            
+            <p>Behind every medical scan is a person waiting anxiously for results. Patients face numerous challenges with traditional diagnostic processes:</p>
+            
+            <!-- Replace your testimonial section with this -->
+<div class="testimonial-carousel">
+    <div class="testimonial-container fade-in active">
+        <div class="testimonial-quote">
+            After my CT scan, I waited over a week for results while my anxiety grew daily. The uncertainty was almost worse than the diagnosis itself. Having faster results would have saved me from sleepless nights and allowed me to start treatment sooner.
+        </div>
+        <div class="testimonial-author">
+            <img src="/api/placeholder/50/50" alt="Patient" class="testimonial-avatar">
+            <span>Sarah Johnson, Patient</span>
+        </div>
+    </div>
+    
+    <div class="testimonial-container fade-in">
+        <div class="testimonial-quote">
+            As someone living in a rural area, I had to travel 3 hours to get to a specialist for my diagnostic imaging. InVisionDX technology would have saved me time, money, and stress by allowing my local doctor to access expert analysis.
+        </div>
+        <div class="testimonial-author">
+            <img src="/api/placeholder/50/50" alt="Patient" class="testimonial-avatar">
+            <span>Michael Roberts, Patient</span>
+        </div>
+    </div>
+    
+    <!-- Replace your testimonial section with this -->
+<div class="testimonial-carousel">
+    <div class="testimonial-container fade-in active">
+        <div class="testimonial-quote">
+            After my CT scan, I waited over a week for results while my anxiety grew daily. The uncertainty was almost worse than the diagnosis itself. Having faster results would have saved me from sleepless nights and allowed me to start treatment sooner.
+        </div>
+        <div class="testimonial-author">
+            <img src="/api/placeholder/50/50" alt="Patient" class="testimonial-avatar">
+            <span>Sarah Johnson, Patient</span>
+        </div>
+    </div>
+    
+        <div class="testimonial-container fade-in">
+                    <div class="testimonial-quote">
+                        As someone living in a rural area, I had to travel 3 hours to get to a specialist for my diagnostic imaging. InVisionDX technology would have saved me time, money, and stress by allowing my local doctor to access expert analysis.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/50/50" alt="Patient" class="testimonial-avatar">
+                        <span>Michael Roberts, Patient</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-container fade-in">
+                    <div class="testimonial-quote">
+                        My initial scan was misinterpreted, leading to months of unnecessary treatment. A second opinion with AI assistance caught the error. This technology could have prevented so much suffering and wasted resources.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/50/50" alt="Patient" class="testimonial-avatar">
+                        <span>Lisa Chen, Patient</span>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls">
+                    <span class="prev-btn">❮</span>
+                    <div class="carousel-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <span class="next-btn">❯</span>
+                </div>
+            </div>
+            
+            <div class="problem-container">
+                <div class="problem-image slide-in-left">
+                    <img src="/api/placeholder/400/300" alt="Patient waiting for results" />
+                </div>
+                <div class="problem-text slide-in-right">
+                    <h3>What Patients Need</h3>
+                    <ul>
+                        <li>Shorter waiting times for diagnostic results</li>
+                        <li>More accurate diagnoses to avoid unnecessary treatments</li>
+                        <li>Access to quality diagnostics regardless of location</li>
+                        <li>Reduced costs through more efficient processes</li>
+                        <li>Transparency and understandability of diagnostic findings</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Our Technology Section -->
+    <section class="section" id="technology">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Technology</h2>
+            </div>
+            
+            <p>InVisionDX integrates cutting-edge AI and machine learning technologies to transform medical diagnostics:</p>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>CNN Architecture</h3>
+                    </div>
+                    <img src="/api/placeholder/400/200" alt="CNN Architecture" class="tech-image">
+                    <div class="tech-card-body">
+                        <p>Our custom Convolutional Neural Networks are trained on millions of medical images to identify patterns invisible to the human eye. These specialized networks achieve:</p>
+                        <ul>
+                            <li>98.7% accuracy in COVID-19 detection from CT scans</li>
+                            <li>Multi-layered feature extraction for nuanced diagnosis</li>
+                            <li>Rapid processing (under 3 seconds per image)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>Transfer Learning</h3>
+                    </div>
+                    <img src="/api/placeholder/400/200" alt="Transfer Learning Diagram" class="tech-image">
+                    <div class="tech-card-body">
+                        <p>We employ advanced transfer learning to adapt pre-trained models for specific diagnostic tasks:</p>
+                        <ul>
+                            <li>Foundation models fine-tuned with specialized medical datasets</li>
+                            <li>Capability to work with limited training examples</li>
+                            <li>Continuous improvement through federated learning</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-card-header">
+                        <h3>Explainable AI</h3>
+                    </div>
+                    <img src="/api/placeholder/400/200" alt="Explainable AI Example" class="tech-image">
+                    <div class="tech-card-body">
+                        <p>Our systems provide transparent explanations for diagnostic suggestions:</p>
+                        <ul>
+                            <li>Heat-map visualization of key diagnostic areas</li>
+                            <li>Confidence scores with probability distributions</li>
+                            <li>Comparable case references from anonymized database</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Future Impact Section -->
+    <section class="section" id="impact" style="background-color: #f5f5f5;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Revolutionizing Healthcare</h2>
+            </div>
+            
+            <p>InVisionDX is transforming the healthcare landscape through:</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Speed & Efficiency</h3>
+                        <p>Diagnostic time reduced from days to minutes, allowing for immediate treatment decisions and reducing patient anxiety.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Accuracy & Reliability</h3>
+                        <p>AI-assisted diagnosis reduces human error and provides consistent quality regardless of hospital location or resources.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Global Accessibility</h3>
+                        <p>Cloud-based platform democratizes access to expert-level diagnostics for remote and underserved communities.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Cost Reduction</h3>
+                        <p>Streamlined processes reduce healthcare costs through earlier intervention and more efficient resource allocation.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Personalized Medicine</h3>
+                        <p>AI insights enable treatment plans tailored to individual patient characteristics and disease presentations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="cta-section" id="cta">
+        <div id="particles-js"></div>
+        <div class="container">
+            <div class="cta-content">
+                <h2>Join the Healthcare Revolution</h2>
+                <p>Experience the future of medical diagnostics with InVisionDX</p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-btn primary">Request a Demo</a>
+                    <a href="#" class="cta-btn secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    <script>
+        // Add floating shapes to header
+        function createShapes() {
+            const floatingShapes = document.querySelector('.floating-shapes');
+            const colors = ['#ffcdd2', '#ef9a9a', '#e57373', '#f8bbd0'];
+            const shapes = 15;
+            
+            for (let i = 0; i < shapes; i++) {
+                const shape = document.createElement('div');
+                shape.classList.add('shape');
+                
+                // Random properties
+                const size = Math.random() * 60 + 20; // between 20px and 80px
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const left = Math.random() * 100; // %
+                const top = Math.random() * 100; // %
+                const delay = Math.random() * 5; // seconds
+                
+                // Apply styles
+                shape.style.width = `${size}px`;
+                shape.style.height = `${size}px`;
+                shape.style.backgroundColor = color;
+                shape.style.left = `${left}%`;
+                shape.style.top = `${top}%`;
+                shape.style.animationDelay = `${delay}s`;
+                
+                floatingShapes.appendChild(shape);
+            }
+        }
+        
+        // Animate statistics counting up
+        function animateStats() {
+            const stats = [
+                { el: document.getElementById('stat1'), target: 40, suffix: '%' },
+                { el: document.getElementById('stat2'), target: 72, suffix: '' },
+                { el: document.getElementById('stat3'), target: 63, suffix: '%' }
+            ];
+            
+            stats.forEach(stat => {
+                let current = 0;
+                const increment = stat.target / 50; // Divide animation into 50 steps
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        clearInterval(timer);
+                        current = stat.target;
+                    }
+                    stat.el.textContent = Math.floor(current) + stat.suffix;
+                }, 40);
+            });
+        }
+        
+        // Animate timeline items when they come into view
+        function animateTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, {threshold: 0.2});
+            
+            timelineItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.3}s`;
+                item.style.animationPlayState = 'paused';
+                observer.observe(item);
+            });
+        }
+        
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', () => {
+            createShapes();
+            navslide();
+            animateCircularProgress();
+            setupCarousel();
+            setupScrollTopButton();
+            
+            // Animate stats when scrolled into view
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    animateStats();
+                    observer.disconnect();
+                }
+            });
+            observer.observe(document.querySelector('.stat-container'));
+            
+            // Animate timeline
+            animateTimeline();
+        });
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+<!-- Add this before closing body tag -->
+<button id="scroll-top-btn" title="Go to top">↑</button>
+</body>
+</html>
