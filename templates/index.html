@@ -725,7 +725,7 @@
     const ENDPOINT_TB = "/predict_tb";
     const ENDPOINT_LUNG = "/predict_lung";
     const ENDPOINT_ALZ = "/predict_alz";
-    const ENDPOINT_BH = "/predict_bh";
+    
 
     // Model configurations based on scan type
     const modelOptions = {
@@ -736,7 +736,7 @@
       ct: [
         { value: "covid", text: "COVID-19 Detection" },
         { value: "lung", text: "Lung Cancer Detection" },
-        { value: "bh", text: "Brain Hemorrhage Detection" }
+        
       ],
       mri: [
         { value: "alz", text: "Alzheimer Detection" }
@@ -915,9 +915,7 @@
         case "alz":
           endpoint = ENDPOINT_ALZ;
           break;
-        case "bh":
-          endpoint = ENDPOINT_BH;
-          break;
+        
         default:
           resultDiv.textContent = "Unknown model selection.";
           predictBar.style.display = "none";

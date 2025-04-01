@@ -140,11 +140,12 @@ def forgot_password():
 # 4. MODEL PATHS AND VARIABLES
 ###############################################################################
 # Paths to your Keras model files
-COVID_MODEL_PATH = "COVID_Detect.keras"
-PNEUMONIA_MODEL_PATH = "pneumonia_predict.keras"
-TB_MODEL_PATH = "tb_model_final.keras"
-LUNG_MODEL_PATH = "best_resnet_model_lc.keras"
-ALZ_MODEL_PATH = "alzheimer_detect.keras"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+COVID_MODEL_PATH = os.path.join(BASE_DIR, "models", "COVID_Detect.keras")
+PNEUMONIA_MODEL_PATH = os.path.join(BASE_DIR, "models", "pneumonia_predict.keras")
+TB_MODEL_PATH = os.path.join(BASE_DIR, "models", "tb_model_final.keras")
+LUNG_MODEL_PATH = os.path.join(BASE_DIR, "models", "best_model_lung_cancer.keras")
+ALZ_MODEL_PATH = os.path.join(BASE_DIR, "models", "alzheimer_detect.keras")
 
 ###############################################################################
 # 5. GLOBAL MODEL VARIABLES
