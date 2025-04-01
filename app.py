@@ -10,6 +10,8 @@ import tensorflow as tf
 from PIL import Image
 from tensorflow.keras.models import load_model
 from datetime import datetime
+from huggingface_hub import hf_hub_download
+from keras.models import load_model
 
 ###############################################################################
 # 1. APP SETUP
@@ -140,12 +142,7 @@ def forgot_password():
 # 4. MODEL PATHS AND VARIABLES
 ###############################################################################
 # Paths to your Keras model files
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-COVID_MODEL_PATH = os.path.join(BASE_DIR, "models", "COVID_Detect.keras")
-PNEUMONIA_MODEL_PATH = os.path.join(BASE_DIR, "models", "pneumonia_predict.keras")
-TB_MODEL_PATH = os.path.join(BASE_DIR, "models", "tb_model_final.keras")
-LUNG_MODEL_PATH = os.path.join(BASE_DIR, "models", "best_model_lung_cancer.keras")
-ALZ_MODEL_PATH = os.path.join(BASE_DIR, "models", "alzheimer_detect.keras")
+
 
 ###############################################################################
 # 5. GLOBAL MODEL VARIABLES
@@ -162,32 +159,116 @@ alz_model = None
 def load_covid_model_if_needed():
     global covid_model
     if covid_model is None:
-        covid_model = load_model(COVID_MODEL_PATH)
-        print("COVID model loaded.")
+        HF_cREPO_ID = "shrrynsh/COVID_Detect.keras"
+        MODEL_cFILENAME = "COVID_Detect.keras"
+        MODEL_cDIR = "models"
+        MODEL_cPATH = os.path.join(MODEL_cDIR, MODEL_cFILENAME)
 
+# Ensure the models directory exists
+        os.makedirs(MODEL_cDIR, exist_ok=True)
+
+# Download the model if it's not already present
+    if not os.path.exists(MODEL_cPATH):
+     print("Downloading model from Hugging Face...")
+     hf_hub_download(
+        repo_id=HF_cREPO_ID,
+        filename=MODEL_cFILENAME,
+        local_dir=MODEL_cDIR
+     )
+  
+# Load the model
+    covid_model = load_model(MODEL_cPATH)
 def load_pneumonia_model_if_needed():
     global pneumonia_model
     if pneumonia_model is None:
-        pneumonia_model = load_model(PNEUMONIA_MODEL_PATH)
-        print("Pneumonia model loaded.")
+        HF_pREPO_ID = "shrrynsh/pneumonia_predict.keras"
+        MODEL_pFILENAME = "pneumonia_predict.keras"
+        MODEL_pDIR = "models"
+        MODEL_pPATH = os.path.join(MODEL_pDIR, MODEL_pFILENAME)
+
+# Ensure the models directory exists
+        os.makedirs(MODEL_pDIR, exist_ok=True)
+
+# Download the model if it's not already present
+    if not os.path.exists(MODEL_pPATH):
+     print("Downloading model from Hugging Face...")
+     hf_hub_download(
+        repo_id=HF_pREPO_ID,
+        filename=MODEL_pFILENAME,
+        local_dir=MODEL_pDIR
+     )
+
+# Load the model
+    pneumonia_model = load_model(MODEL_pPATH)
 
 def load_tb_model_if_needed():
     global tb_model
     if tb_model is None:
-        tb_model = load_model(TB_MODEL_PATH)
-        print("TB model loaded.")
+        HF_tREPO_ID = "shrrynsh/tb_model_final.keras"
+        MODEL_tFILENAME = "tb_model_final.keras"
+        MODEL_tDIR = "models"
+        MODEL_tPATH = os.path.join(MODEL_tDIR, MODEL_tFILENAME)
+
+# Ensure the models directory exists
+        os.makedirs(MODEL_tDIR, exist_ok=True)
+
+# Download the model if it's not already present
+    if not os.path.exists(MODEL_tPATH):
+     print("Downloading model from Hugging Face...")
+     hf_hub_download(
+        repo_id=HF_tREPO_ID,
+        filename=MODEL_tFILENAME,
+        local_dir=MODEL_tDIR
+     )
+
+# Load the model
+    tb_model = load_model(MODEL_tPATH)
 
 def load_lung_model_if_needed():
     global lung_model
     if lung_model is None:
-        lung_model = load_model(LUNG_MODEL_PATH)
-        print("Lung cancer model loaded.")
+        HF_lREPO_ID = "shrrynsh/best_model_lung_cancer.keras"
+        MODEL_lFILENAME = "best_model_lung_cancer.keras"
+        MODEL_lDIR = "models"
+        MODEL_lPATH = os.path.join(MODEL_lDIR, MODEL_lFILENAME)
+
+# Ensure the models directory exists
+        os.makedirs(MODEL_lDIR, exist_ok=True)
+
+# Download the model if it's not already present
+    if not os.path.exists(MODEL_lPATH):
+     print("Downloading model from Hugging Face...")
+     hf_hub_download(
+        repo_id=HF_lREPO_ID,
+        filename=MODEL_lFILENAME,
+        local_dir=MODEL_lDIR
+     )
+
+# Load the model
+    lung_model = load_model(MODEL_lPATH)
 
 def load_alz_model_if_needed():
     global alz_model
     if alz_model is None:
-        alz_model = load_model(ALZ_MODEL_PATH)
-        print("Alzheimer model loaded successfully.")
+        HF_aREPO_ID = "shrrynsh/alzheimer_detect.keras"
+        MODEL_aFILENAME = "alzheimer_detect.keras"
+        MODEL_aDIR = "models"
+        MODEL_aPATH = os.path.join(MODEL_aDIR, MODEL_aFILENAME)
+
+# Ensure the models directory exists
+        os.makedirs(MODEL_aDIR, exist_ok=True)
+
+# Download the model if it's not already present
+    if not os.path.exists(MODEL_aPATH):
+     print("Downloading model from Hugging Face...")
+     hf_hub_download(
+        repo_id=HF_aREPO_ID,
+        filename=MODEL_aFILENAME,
+        local_dir=MODEL_aDIR
+     )
+
+# Load the model
+    alz_model = load_model(MODEL_aPATH)
 
 ###############################################################################
 # 7. PREPROCESS & PREDICT LOGIC FOR THE FIRST 4 MODELS (COVID, PNEUMONIA, TB, LUNG)
