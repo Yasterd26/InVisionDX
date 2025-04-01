@@ -1,3 +1,4 @@
 models/BrainTumor_model.keras filter=lfs diff=lfs merge=lfs -text
 models/COVID_Detect.keras filter=lfs diff=lfs merge=lfs -text
 models/best_model_lung_cancer.keras filter=lfs diff=lfs merge=lfs -text
+demo.mp4 filter=lfs diff=lfs merge=lfs -text
