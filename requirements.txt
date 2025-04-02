@@ -3,7 +3,7 @@ flask-sqlalchemy
 huggingface_hub
 flask-login
 werkzeug
-tensorflow
+tensorflow==2.19.0
 numpy
 opencv-python
 pillow
